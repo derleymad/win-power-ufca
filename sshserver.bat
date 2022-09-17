@@ -8,3 +8,6 @@ net start sshd
 powershell Set-Service sshd -StartupType Automatic
 powershell get-service | findstr ssh
 
+
+https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell
+
