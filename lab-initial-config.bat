@@ -9,7 +9,9 @@ ECHO FEITO POR @WANDERLEY M. B. FILHO
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 FOR %%A IN (adobereader googlechrome firefox jre8 winrar 7zip) DO CHOCO INSTALL %%A -Y
 
-choco install veyon --params '"/config:C:\setup\LabConfig.json"'
+wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config.json
+wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/lab_public_key.pem
+choco install veyon --params '"/config:server-config.json"'
 
 echo ------------------------ CRIANDO USUARIO UFCA ------------------------
 net user UFCA /ADD
