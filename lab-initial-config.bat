@@ -8,6 +8,7 @@ FOR %%A IN (foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo geogebra
 mkdir "C:\lab-config"
 cd "C:\lab-config"
 
+wget https://github.com/derleymad/win-power-ufca/raw/main/image.jpeg
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config.json
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/lab_public_key.pem
 choco install veyon --params '"/config:C:\lab-config\server-config.json"'
