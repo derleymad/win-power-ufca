@@ -1,0 +1,11 @@
+{
+    "Authentication": {
+        "Method": 1
+    },
+    "LDAP": {
+        "LocationNameAttribute": "cn"
+    },
+    "Master": {
+        "ComputerDoubleClickFeature": "a18e545b-1321-4d4e-ac34-adc421c6e9c8"
+    }
+}
