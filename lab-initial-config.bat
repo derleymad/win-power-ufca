@@ -1,17 +1,16 @@
 @ECHO OFF
-TITLE CONFIGURACOES INICIAIS DOS COMPUTADORES DA UFCA 
+TITLE CONFIGURACOES INICIAIS DOS COMPUTADORES DOS LAB 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-cls
-ECHO FEITO POR @WANDERLEY M. B. FILHO
-
-
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-FOR %%A IN (adobereader googlechrome firefox jre8 winrar 7zip) DO CHOCO INSTALL %%A -Y
+FOR %%A IN (foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo geogebra powerbi texmaker) DO CHOCO INSTALL %%A -Y
+
+mkdir "C:\lab-config"
+cd "C:\lab-config"
 
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config.json
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/lab_public_key.pem
-choco install veyon --params '"/config:server-config.json"'
+choco install veyon --params '"/config:C:\lab-config\server-config.json"'
 
 echo ------------------------ CRIANDO USUARIO UFCA ------------------------
 net user UFCA /ADD
@@ -259,27 +258,4 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "E
 
 ECHO ------------------------ DESATIVANDO COMPLETAMENTE O CENTRO DE NOTIVACAO NO WINDOWS 10.REG------------------------ 
 
-
 REG ADD "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d 1 /f
-
-
-GOTO UPDATE
-:UPDATE
-powershell Install-Module PSWindowsUpdate
-powershell Set-ExecutionPolicy AllSigned -force
-powershell Import-Module PSWindowsUpdate
-
-ECHO Set WshShell = WScript.CreateObject("WScript.Shell") >> run.vbs
-ECHO WScript.Sleep 10000 >> run.vbs
-ECHO ' Type a >> run.vbs
-ECHO WshShell.SendKeys "A" >> run.vbs
-ECHO WshShell.SendKeys "{ENTER}" >> run.vbs
-
-GOTO UPGRADE
-:UPGRADE
-run.vbs
-GOTO RESTART
-
-:RESTART
-ECHO ------------------------ RENICIANDO ------------------------ 
-SHUTDOWN -r -t 00
