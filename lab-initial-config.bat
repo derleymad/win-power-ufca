@@ -13,6 +13,11 @@ wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-conf
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/lab_public_key.pem
 choco install veyon --params '"/config:C:\lab-config\server-config.json"'
 
+reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d C:\lab-config\image.bmp /f
+RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
+
+REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\ActiveDesktop /v NoChangingWallPaper /t REG_DWORD /d 1 
+
 echo ------------------------ CRIANDO USUARIO UFCA ------------------------
 net user UFCA /ADD
 
