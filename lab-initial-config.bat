@@ -1,29 +1,7 @@
 @ECHO OFF
 TITLE CONFIGURACOES INICIAIS DOS COMPUTADORES DOS LAB 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-FOR %%A IN (foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo geogebra powerbi texmaker) DO CHOCO INSTALL %%A -Y
-
-mkdir "C:\lab-config"
-cd "C:\lab-config"
-
-wget https://github.com/derleymad/win-power-ufca/raw/main/image.jpeg
-wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config.json
-wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/lab_public_key.pem
-choco install veyon --params '"/config:C:\lab-config\server-config.json"'
-
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d C:\lab-config\image.bmp /f
-RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
-
-REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\ActiveDesktop /v NoChangingWallPaper /t REG_DWORD /d 1 
-
-echo ------------------------ CRIANDO USUARIO UFCA ------------------------
-net user UFCA /ADD
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ECHO ------------------------ COPIA DO REGISTRO FEITA E SALVA EM C:/RegBackup/Backup.reg 
-
 SETLOCAL
 SET RegBackup=%SYSTEMDRIVE%\RegBackup
 IF NOT EXIST "%RegBackup%" md "%RegBackup%"
@@ -44,6 +22,36 @@ DEL "%RegBackup%\HKCU.reg"
 DEL "%RegBackup%\HKCR.reg"
 DEL "%RegBackup%\HKU.reg"
 DEL "%RegBackup%\HKCC.reg"
+
+echo ------------------------ INSTALANDO PROGRAMAS ------------------------ 
+
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+FOR %%A IN (foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo geogebra powerbi texmaker) DO CHOCO INSTALL %%A -Y
+
+mkdir "C:\lab-config"
+cd "C:\lab-config"
+
+echo ------------------------ CRIANDO PASTA NO C:\lab-config ------------------------ 
+
+wget https://github.com/derleymad/win-power-ufca/raw/main/image.jpeg
+wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config.json
+wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/lab_public_key.pem
+choco install veyon --params '"/config:C:\lab-config\server-config.json"'
+
+
+reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d C:\lab-config\image.bmp /f
+RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
+
+REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\ActiveDesktop /v NoChangingWallPaper /t REG_DWORD /d 1 
+
+echo ------------------------ CRIANDO USUARIO UFCA ------------------------
+net user UFCA /ADD
+
+echo ------------------------ DEIXANDO USUARIO UFCA COMO MODO LEITURA -------------------------
+
+sudo cacls C:\Users\UFCA\* /E /P UFCA:R
+sudo cacls C:\Users\UFCA\Documents /E /P UFCA:F
+sudo cacls C:\Users\UFCA\Downloads /E /P UFCA:F
 
 ECHO ------------------------ REMOVENDO TASKS ------------------------ 
 
