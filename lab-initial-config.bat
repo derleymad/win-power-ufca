@@ -37,7 +37,7 @@ wget https://github.com/derleymad/win-power-ufca/raw/main/changeuser.bat
 wget https://github.com/derleymad/win-power-ufca/raw/main/image.jpeg
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config.json
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/lab_public_key.pem
-choco install veyon --params '"/config:C:\lab-config\server-config.json"'
+choco install veyon --params '"/config:C:\lab-config\server-config.json"' -y 
 
 
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d C:\lab-config\image.bmp /f
