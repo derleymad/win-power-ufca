@@ -28,10 +28,18 @@ echo ------------------------ INSTALANDO PROGRAMAS ------------------------
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 FOR %%A IN (wget foxitreader googlechrome firefox jre8 vlc winrar 7zip gsudo geogebra powerbi texmaker) DO CHOCO INSTALL %%A -Y
 
-mkdir "C:\lab-config"
-cd "C:\lab-config"
+echo ------------------------ INSTALANDO SSHSERVER -------------------------
+
+powershell "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
+REM Start the sshd service
+powershell "Start-Service sshd"
+REM OPTIONAL but recommended:
+powershell "Set-Service -Name sshd -StartupType 'Automatic'"
 
 echo ------------------------ CRIANDO PASTA NO C:\lab-config ------------------------ 
+
+mkdir "C:\lab-config"
+cd "C:\lab-config"
 
 wget https://github.com/derleymad/win-power-ufca/raw/main/imagens/changeuser.bat
 wget https://github.com/derleymad/win-power-ufca/raw/main/imagens/image.jpeg
@@ -40,7 +48,6 @@ wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/chave/lab_p
 choco install veyon --params '"/config:C:\lab-config\server-config.json"' -y 
 
 "C:\Program Files\Veyon\veyon-cli.exe" authkeys import lab/public "C:\lab-config\lab_public_key.pem"
-
 
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d C:\lab-config\image.bmp /f
 RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
