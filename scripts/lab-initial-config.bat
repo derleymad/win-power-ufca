@@ -33,11 +33,13 @@ cd "C:\lab-config"
 
 echo ------------------------ CRIANDO PASTA NO C:\lab-config ------------------------ 
 
-wget https://github.com/derleymad/win-power-ufca/raw/main/changeuser.bat
-wget https://github.com/derleymad/win-power-ufca/raw/main/image.jpeg
-wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config.json
-wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/lab_public_key.pem
+wget https://github.com/derleymad/win-power-ufca/raw/main/imagens/changeuser.bat
+wget https://github.com/derleymad/win-power-ufca/raw/main/imagens/image.jpeg
+wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config/server-config.json
+wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/chave/lab_public_key.pem
 choco install veyon --params '"/config:C:\lab-config\server-config.json"' -y 
+
+"C:\Program Files\Veyon\veyon-cli.exe" authkeys import lab/public "C:\lab-config\lab_public_key.pem"
 
 
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d C:\lab-config\image.bmp /f
