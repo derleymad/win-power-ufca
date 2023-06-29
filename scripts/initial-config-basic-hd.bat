@@ -23,17 +23,16 @@ DEL "%RegBackup%\HKCR.reg"
 DEL "%RegBackup%\HKU.reg"
 DEL "%RegBackup%\HKCC.reg"
 
+echo ------------------------ DESISNTALALNDO QUALQUER PATH DO CHOCOLATEY ------------------------
+RD /S /Q C:\ProgramData\chocolatey
+
 echo ------------------------ INSTALANDO PROGRAMAS ------------------------ 
 
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 FOR %%A IN (wget gsudo) DO CHOCO INSTALL %%A -Y
 
-echo ------------------------ INSTALANDO WINGET ------------------------ 
-powershell -Command "Get-ExecutionPolicy"
-powershell -Command "Set-ExecutionPolicy RemoteSigned"
-powershell -Command "Invoke-WebRequest -Uri https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.appxbundle -OutFile winget.appxbundle"
-powershell -Command "Add-AppxPackage .\winget.appxbundle"
-winget
+echo -------------- DESABILITANDO UAC ------------------------------------
+reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f
 
 echo ------------------------ INSTALANDO SSHSERVER -------------------------
 
@@ -45,32 +44,43 @@ powershell "Set-Service -Name sshd -StartupType 'Automatic'"
 
 echo ------------------------ CRIANDO PASTA NO C:\lab-config ------------------------ 
 
+echo POWER CONFIGS
+
+powershell Set-NetAdapterAdvancedProperty -Name "Ethernet" -DisplayName "Ethernet com uso eficiente de energia" -DisplayValue "Desligado"
+powercfg /x -monitor-timeout-ac 0
+powercfg /x -standby-timeout-ac 0
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /f /v HiberbootEnabled /t REG_DWORD /d 0
+
+ECHO DESATIVANDO TELA CHATA
+sudo reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement" /f /v ScoobeSystemSettingEnabled /t REG_DWORD /d 0
+
 mkdir "C:\lab-config"
 cd "C:\lab-config"
 
-wget https://github.com/derleymad/win-power-ufca/raw/main/imagens/changeuser.bat
 wget https://github.com/derleymad/win-power-ufca/raw/main/imagens/image.jpeg
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config/server-config.json
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/chave/lab_public_key.pem
-choco install veyon --params '"/config:C:\lab-config\server-config.json"' -y 
+
+choco install veyon --force --version 4.7.4 --params '"/config:C:\lab-config\server-config.json"' -y
 
 "C:\Program Files\Veyon\veyon-cli.exe" authkeys import lab/public "C:\lab-config\lab_public_key.pem"
 
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d C:\lab-config\image.bmp /f
-RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
+echo ------------------------ DEIXANDOO VEYON COM ATRASO NA INICILIZACAO ---------------------------------------
+sc config VeyonService start=delayed-auto
 
-REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\ActiveDesktop /v NoChangingWallPaper /t REG_DWORD /d 1 
+echo ------------------------ DEIXANDO LOGIN USUARIOS COMO OTHERS  -------------------------
+REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /f /v  dontdisplaylastusername /t  REG_DWORD /d 1
 
-echo ------------------------ CRIANDO USUARIO UFCA ------------------------
-net user UFCA /ADD
 
-echo ------------------------ DEIXANDO USUARIO UFCA COMO MODO LEITURA -------------------------
+echo -------------------------MUDANDO USUARIO UFCA--------------------------------------
+net user UFCA UFCA
 
-REM ESSAA PARTE DESTIVA A SUSPENSAO POR ENERGIA powercfg -x -standby-timeout-ac 0
+echo -----------------------------------CREATING DTI USER-------------------------------------
+net user /add DTI UFCA@ROOT
+net localgroup Administradores DTI /add
 
-sudo cacls C:\Users\UFCA\* /E /P UFCA:R
-sudo cacls C:\Users\UFCA\Documents /E /P UFCA:F
-sudo cacls C:\Users\UFCA\Downloads /E /P UFCA:F
+REM ESSAA PARTE DESTIVA A SUSPENSAO POR ENERGIA
+powercfg -x -standby-timeout-ac 0
 
 ECHO ------------------------ REMOVENDO TASKS ------------------------ 
 
