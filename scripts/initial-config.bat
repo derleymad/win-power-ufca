@@ -13,8 +13,8 @@ echo ------------------------ CRIANDO USUARIO UFCA ------------------------
 net user UFCA /ADD
 
 echo ------------------------ ATUALIZANDO COM WINDOWS UPDATE  ------------------------
-powershell Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
 powershell Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+powershell Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
 powershell Install-Module -Name PSWindowsUpdate -Repository PSGallery -Force
 
 powershell Set-ExecutionPolicy Bypass 
