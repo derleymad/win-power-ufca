@@ -12,14 +12,7 @@ FOR %%A IN (microsoft-office-deployment adobereader foxitreader googlechrome fir
 echo ------------------------ CRIANDO USUARIO UFCA ------------------------
 net user UFCA /ADD
 
-echo ------------------------ ATUALIZANDO COM WINDOWS UPDATE  ------------------------
-powershell Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-powershell Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
-powershell Install-Module -Name PSWindowsUpdate -Repository PSGallery -Force
 
-powershell Set-ExecutionPolicy Bypass 
-powershell Get-WindowsUpdate
-powershell Install-WindowsUpdate -AcceptAll
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -267,6 +260,16 @@ ECHO ------------------------ DESATIVANDO COMPLETAMENTE O CENTRO DE NOTIVACAO NO
 
 
 REG ADD "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d 1 /f
+
+echo ------------------------ ATUALIZANDO COM WINDOWS UPDATE  ------------------------
+powershell Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+powershell Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
+powershell Install-Module -Name PSWindowsUpdate -Repository PSGallery -Force
+
+powershell Set-ExecutionPolicy Bypass 
+powershell Get-WindowsUpdate
+powershell Install-WindowsUpdate -AcceptAll -IgnoreReboot
+
 
 GOTO RESTART
 
