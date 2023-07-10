@@ -19,7 +19,7 @@ powershell Install-Module -Name PSWindowsUpdate -Repository PSGallery -Force
 
 powershell Set-ExecutionPolicy Bypass 
 powershell Get-WindowsUpdate
-powershell Install-WindowsUpdate
+powershell Install-WindowsUpdate -AcceptAll
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
