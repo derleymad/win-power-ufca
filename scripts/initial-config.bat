@@ -7,10 +7,20 @@ ECHO FEITO POR @WANDERLEY M. B. FILHO
 
 
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-FOR %%A IN (microsoft-office-deployment adobereader googlechrome firefox jre8 vlc winrar 7zip teamviewer google-drive-file-stream) DO CHOCO INSTALL %%A -Y
+FOR %%A IN (microsoft-office-deployment adobereader foxitreader googlechrome firefox jre8 vlc winrar 7zip teamviewer google-drive-file-stream anydesk.install) DO CHOCO INSTALL %%A -Y
 
 echo ------------------------ CRIANDO USUARIO UFCA ------------------------
 net user UFCA /ADD
+
+echo ------------------------ ATUALIZANDO COM WINDOWS UPDATE  ------------------------
+powershell Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
+powershell Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+powershell Install-Module -Name PSWindowsUpdate -Repository PSGallery -Force
+
+powershell Set-ExecutionPolicy Bypass 
+powershell Get-WindowsUpdate
+powershell Install-WindowsUpdate
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ECHO ------------------------ COPIA DO REGISTRO FEITA E SALVA EM C:/RegBackup/Backup.reg 
@@ -258,22 +268,6 @@ ECHO ------------------------ DESATIVANDO COMPLETAMENTE O CENTRO DE NOTIVACAO NO
 
 REG ADD "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d 1 /f
 
-
-GOTO UPDATE
-:UPDATE
-powershell Install-Module PSWindowsUpdate
-powershell Set-ExecutionPolicy AllSigned -force
-powershell Import-Module PSWindowsUpdate
-
-ECHO Set WshShell = WScript.CreateObject("WScript.Shell") >> run.vbs
-ECHO WScript.Sleep 10000 >> run.vbs
-ECHO ' Type a >> run.vbs
-ECHO WshShell.SendKeys "A" >> run.vbs
-ECHO WshShell.SendKeys "{ENTER}" >> run.vbs
-
-GOTO UPGRADE
-:UPGRADE
-run.vbs
 GOTO RESTART
 
 :RESTART
