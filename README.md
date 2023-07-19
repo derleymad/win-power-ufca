@@ -30,13 +30,12 @@ powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/de
 ```
 Para instalar o computador a ser controlado com SSD:
 ```cmd
-powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/initial-config-basic-ssd.bat" -OutFile initial-config-basic-ssd.bat; & ".\initial-config-basic.bat"
+powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/initial-config-basic-ssd.bat" -OutFile initial-config-basic-ssd.bat; & ".\initial-config-basic-ssd.bat"
 ```
 Para instalar no computador a controlar
 ```cmd
-comando para colar aqui
+powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/install-or-update-master.bat" -OutFile install-or-update-master.bat; & ".\install-or-update-master.bat"
 ```
-
 
 Para importar todos os IP's Nomes e Macs do laboratório para o Veyon Master, baixar dos as panilhas do google sheet e adiciona-las na pasta principal do veyon C:\Program Files\Veyon, em seguida rodar o arquivo importscvs.bat como administrador
 
