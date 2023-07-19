@@ -30,7 +30,7 @@ powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/de
 ```
 Para instalar o computador a ser controlado com SSD:
 ```cmd
-powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/initial-config-basic-ssd.bat" -OutFile initial-config-basic-ssd.bat; & ".\install-win.bat"
+powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/initial-config-basic-ssd.bat" -OutFile initial-config-basic-ssd.bat; & ".\initial-config-basic.bat"
 ```
 Para instalar no computador a controlar
 ```cmd
