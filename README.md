@@ -22,7 +22,8 @@ Este projeto está sendo desenvolvido para uso dos laborátorios da UFCA. O prog
 #### Veyon:
 * [Para mais informações]([https://github.com/derleymad/projeto-app-native/blob/main/curativar/package.json](https://github.com/veyon/veyon))
 
-## Setup
+## Setup 
+### No cmd como administrador:
 
 Para instalar o computador a ser controlado com HD:
 ```cmd
@@ -32,9 +33,16 @@ Para instalar o computador a ser controlado com SSD:
 ```cmd
 powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/initial-config-basic-ssd.bat" -OutFile initial-config-basic-ssd.bat; & ".\initial-config-basic-ssd.bat"
 ```
-Para instalar no computador a controlar
+Para instalar no computador master
+
 ```cmd
 powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/install-or-update-master.bat" -OutFile install-or-update-master.bat; & ".\install-or-update-master.bat"
+```
+
+### Setup - Atualizar filas e IP's
+
+```cmd
+powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/update-ips.bat" -OutFile update-ips.bat; & ".\update-ips.bat"
 ```
 
 Para importar todos os IP's Nomes e Macs do laboratório para o Veyon Master, baixar dos as panilhas do google sheet e adiciona-las na pasta principal do veyon C:\Program Files\Veyon, em seguida rodar o arquivo importscvs.bat como administrador
