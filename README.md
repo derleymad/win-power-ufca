@@ -24,9 +24,13 @@ Este projeto está sendo desenvolvido para uso dos laborátorios da UFCA. O prog
 
 ## Setup
 
-Para instalar o computador a ser controlado :
+Para instalar o computador a ser controlado com HD:
 ```cmd
-comando para colar aki
+powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/initial-config-basic-hd.bat" -OutFile initial-config-basic-hd.bat; & ".\initial-config-basic-hd.bat"
+```
+Para instalar o computador a ser controlado com SSD:
+```cmd
+powershell -Command Invoke-WebRequest -Uri "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/scripts/initial-config-basic-ssd.bat" -OutFile initial-config-basic-ssd.bat; & ".\install-win.bat"
 ```
 Para instalar no computador a controlar
 ```cmd
