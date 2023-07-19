@@ -10,7 +10,6 @@ wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilh
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20LAB_K04.csv" -O "FILAS - LAB_K04.csv"
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20LAB_K07.csv" -O "FILAS - LAB_K07.csv"
 
-curl -O "https://github.com/derleymad/win-power-ufca/raw/main/imagens/image.jpeg"
 curl -O "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config/server-config.json"
 curl -O "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/chave/lab_public_key.pem"
 curl -O "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/chave/lab_private_key.pem"
