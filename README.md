@@ -16,11 +16,8 @@ Este projeto está sendo desenvolvido para uso dos laborátorios da UFCA. O prog
 
 ## To do
 
-- [] Documentação
+- [ ] Documentação
 - [x] Implementação
-
-- React Native 
-- Typescrit
 
 #### Veyon:
 * [Para mais informações]([https://github.com/derleymad/projeto-app-native/blob/main/curativar/package.json](https://github.com/veyon/veyon))
