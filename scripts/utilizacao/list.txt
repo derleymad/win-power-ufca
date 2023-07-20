@@ -1,0 +1,24 @@
+SWI-Prolog 
+Eclipse 
+Netbeans 
+PyCharm Community
+OpenGL + freeglut
+Codeblocks
+Figma
+VSCode
+GitHub Desktop
+XAMMP Server
+Visual Paradigm Free Community
+Dev-C++
+Astah UML
+Anaconda Distribution
+JDK 
+Python
+Thonny IDE
+MySQL Workbench
+gdb
+g++
+make
+cmake
+flex
+bison

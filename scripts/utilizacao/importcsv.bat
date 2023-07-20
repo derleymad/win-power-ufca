@@ -1,0 +1,10 @@
+"C:\Program Files\Veyon\veyon-cli.exe" networkobjects import "C:\Program Files\Veyon\FILAS - BIBLIOTECA.csv" location "BIBLIOTECA" format "%%name%%,%%host%%,%%mac%%"
+"C:\Program Files\Veyon\veyon-cli.exe" networkobjects import "C:\Program Files\Veyon\FILAS - LAB_A02.csv" location "LAB_A02" format "%%name%%,%%host%%,%%mac%%"
+"C:\Program Files\Veyon\veyon-cli.exe" networkobjects import "C:\Program Files\Veyon\FILAS - LAB_C02.csv" location "LAB_C02" format "%%name%%,%%host%%,%%mac%%"  
+"C:\Program Files\Veyon\veyon-cli.exe" networkobjects import "C:\Program Files\Veyon\FILAS - LAB_E02.csv" location "LAB_E02" format "%%name%%,%%host%%,%%mac%%"
+"C:\Program Files\Veyon\veyon-cli.exe" networkobjects import "C:\Program Files\Veyon\FILAS - LAB_G23.csv" location "LAB_G23" format "%%name%%,%%host%%,%%mac%%"
+"C:\Program Files\Veyon\veyon-cli.exe" networkobjects import "C:\Program Files\Veyon\FILAS - LAB_K02.csv" location "LAB_K02" format "%%name%%,%%host%%,%%mac%%"
+"C:\Program Files\Veyon\veyon-cli.exe" networkobjects import "C:\Program Files\Veyon\FILAS - LAB_K04.csv" location "LAB_K04" format "%%name%%,%%host%%,%%mac%%"
+"C:\Program Files\Veyon\veyon-cli.exe" networkobjects import "C:\Program Files\Veyon\FILAS - LAB_K05.csv" location "LAB_K05" format "%%name%%,%%host%%,%%mac%%"
+"C:\Program Files\Veyon\veyon-cli.exe" networkobjects import "C:\Program Files\Veyon\FILAS - LAB_K07.csv" location "LAB_K07" format "%%name%%,%%host%%,%%mac%%"
+PAUSE
