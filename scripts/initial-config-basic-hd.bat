@@ -61,6 +61,9 @@ wget https://github.com/derleymad/win-power-ufca/raw/main/imagens/image.jpeg
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config/server-config.json
 wget https://raw.githubusercontent.com/derleymad/win-power-ufca/main/chave/lab_public_key.pem
 
+reg add "HKEY_CURRENT_USER\control panel\desktop" /v wallpaper /t REG_SZ /d  C:\lab-config\image.jpeg /f
+RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
+
 choco install veyon --force --version 4.7.4 --params '"/config:C:\lab-config\server-config.json"' -y
 
 "C:\Program Files\Veyon\veyon-cli.exe" authkeys import lab/public "C:\lab-config\lab_public_key.pem"
