@@ -10,16 +10,12 @@ wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilh
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20LAB_K02.csv" -O "FILAS - LAB_K02.csv"
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20LAB_K04.csv" -O "FILAS - LAB_K04.csv"
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20LAB_K07.csv" -O "FILAS - LAB_K07.csv"
-<<<<<<< HEAD
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20CCAB_M105.csv" -O "FILAS - CCAB_M105.csv"
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20CCAB_M107.csv" -O "FILAS - CCAB_M107.csv"
-=======
-wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20CCAB_M105.csv" - O "FILAS - CCAB_M105.csv"
-wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20CCAB_M107.csv" - O "FILAS - CCAB_M107.csv"
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20BJS.csv" - O "FILAS - BJS.csv"
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20BJS2.csv" - O "FILAS - BJS2.csv"
 wget -q "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/planilhas/FILAS%%20-%%20FAMED.csv" - O "FILAS - FAMED.csv"
->>>>>>> 7465dd44a77df183cfc669179e081bf43d606c9f
+
 
 curl -O "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/server-config/server-config.json"
 curl -O "https://raw.githubusercontent.com/derleymad/win-power-ufca/main/chave/lab_public_key.pem"
